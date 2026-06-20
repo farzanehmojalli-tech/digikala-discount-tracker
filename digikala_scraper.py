@@ -1,3 +1,5 @@
+import os
+import json
 import requests
 import gspread
 from google.oauth2.service_account import Credentials
@@ -7,7 +9,13 @@ import pytz
 # ۱. تنظیمات اتصال به گوگل شیت
 # فایل credentials.json باید دقیقا کنار همین فایل پایتون باشد
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
-creds = Credentials.from_service_account_file("credentials.json", scopes=SCOPES)
+#  کد جدید و هوشمند:
+if os.path.exists("credentials.json"):
+    creds = Credentials.from_service_account_file("credentials.json", scopes=SCOPES)
+else:
+    secret_data = json.loads(os.environ.get("GOOGLE_CREDENTIALS"))
+    creds = Credentials.from_service_account_info(secret_data, scopes=SCOPES)
+
 client = gspread.authorize(creds)
 
 SHEET_ID = '1acgDg8OK1GSfppROnfjuIFpB6191nz2cQLBDZZgFbgQ'
