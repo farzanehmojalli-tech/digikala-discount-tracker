@@ -2,9 +2,8 @@ name: Digikala Daily Scraper Automation
 
 on:
   schedule:
-    # این کد هر روز ساعت 12:00 ظهر به وقت گرینویچ (ساعت 15:30 به وقت تهران) اجرا می‌شود
     - cron: '0 9 * * *'
-  workflow_dispatch: # این گزینه به شما اجازه می‌دهد هر وقت خواستید دستی هم دکمه ران را بزنید
+  workflow_dispatch:
 
 jobs:
   scrape-and-update:
