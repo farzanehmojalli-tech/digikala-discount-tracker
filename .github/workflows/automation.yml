@@ -1,0 +1,30 @@
+name: Digikala Daily Scraper Automation
+
+on:
+  schedule:
+    # این کد هر روز ساعت 12:00 ظهر به وقت گرینویچ (ساعت 15:30 به وقت تهران) اجرا می‌شود
+    - cron: '0 9 * * *'
+  workflow_dispatch: # این گزینه به شما اجازه می‌دهد هر وقت خواستید دستی هم دکمه ران را بزنید
+
+jobs:
+  scrape-and-update:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository Code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.14'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests gspread google-auth pytz
+
+    - name: Run Scraper Script
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+      run: python digikala_scraper.py
