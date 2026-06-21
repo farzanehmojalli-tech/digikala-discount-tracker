@@ -92,7 +92,7 @@ def main():
     tehran_tz = pytz.timezone('Asia/Tehran')
     update_time = datetime.now(tehran_tz).strftime("%Y-%m-%d %H:%M:%S")
     
-    headers_row = ["نام محصول", "درصد تخفیف", "قیمت فروش (تومان)", "لینک محصول", f"آخرین بروزرسانی: {update_time}"]
+    headers_row = ["نام محصول", "درصد تخفیف", "قیمت فروش (ریال)", "لینک محصول", f"آخرین بروزرسانی: {update_time}"]
     
     # تبدیل تخفیف به فرمت رشته‌ای دارای %
     final_data = [headers_row]
